@@ -23,10 +23,13 @@ setup(
 
     keywords='jupyter sql kernel',
     packages=find_packages(),
-    install_requires=['jupyter', 'jupyter_client', 'ipython', 'sqlparse', 'sqlalchemy'],
-    package_data={
-    },
-
+    install_requires=[
+        'jupyter',
+        'jupyter_client',
+        'ipython',
+        'sqlparse',
+        'sqlalchemy'
+    ],
     entry_points={
     }
 )

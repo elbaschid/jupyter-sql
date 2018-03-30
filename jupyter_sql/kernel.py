@@ -1,10 +1,12 @@
+import os
+import re
+import sqlparse
+import traceback
+
 from ipykernel.kernelbase import Kernel as BaseKernel
 from sqlalchemy import create_engine
 from sqlalchemy.exc import DatabaseError
-import sqlparse
-import re
 from sys import exc_info
-import traceback
 
 
 class SqlKernel(BaseKernel):
@@ -26,6 +28,8 @@ class SqlKernel(BaseKernel):
         self.__sql_engine = None
         self.__sql_connection = None
 
+        self.__process_connection_str(os.getenv('DATABASE_URL'))
+
     def do_execute(self, code, silent=False, store_history=True, user_expressions=None, allow_stdin=False):
 
         code_parts = re.split(R'(^[ \t]*!.+;$)', code, flags=re.MULTILINE)
@@ -34,12 +38,7 @@ class SqlKernel(BaseKernel):
         try:
             for part in code_parts:
                 part = part.strip()
-
-                if part.startswith('!') and part.endswith(';'):
-                    connection_str = part.rstrip(';').lstrip('!').strip()
-                    self.__process_connection_str(connection_str)
-                else:
-                    self.__process_sql_part(part, silent)
+                self.__process_sql_part(part, silent)
         except DatabaseError as e:
             ex_type, ex, tb = exc_info()
             error_content = {
