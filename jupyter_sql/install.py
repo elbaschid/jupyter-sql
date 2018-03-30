@@ -11,11 +11,11 @@ from IPython.utils.tempdir import TemporaryDirectory
 
 kernel_json = {
     "argv": [sys.executable,
-             "-m", "jupyter-sql",
+             "-m", "jupyter_sql",
              "-f", "{connection_file}"],
     "display_name": "SQL",
     "language": "sql",
-    "name": "jupyter-sql",
+    "name": "jupyter_sql",
 }
 
 

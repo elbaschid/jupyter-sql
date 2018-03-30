@@ -6,14 +6,7 @@ setup(
     version='0.1.0',
 
     description='Simple SQL kernel for Jupyter',
-
-    url='https://github.com/jablonskim/jupyter-sql',
-
-    author='Mateusz Jablonski',
-    author_email='mjablonski92@gmail.com',
-
     license='MIT',
-
     classifiers=[
         'Development Status :: 3 - Alpha',
 
